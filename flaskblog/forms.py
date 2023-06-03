@@ -1,7 +1,7 @@
 '''Forms'''
 from flask_wtf import FlaskForm
 from flask_wtf.file import FileField, FileAllowed
-from wtforms import StringField,SubmitField,BooleanField
+from wtforms import StringField,SubmitField,BooleanField,TextAreaField
 from wtforms.validators import DataRequired,Length,Email,EqualTo, ValidationError
 from flaskblog.models import User
 from flask_login import current_user
@@ -53,3 +53,9 @@ class UpdateAccountForm(FlaskForm):
             user = User.query.filter_by(email=email.data).first()
             if user:
                 raise ValidationError("An account is already created with this Email. Please create another email account to create an account here.")
+            
+
+class PostForm(FlaskForm):
+    title = StringField('Title', validators = [DataRequired()])
+    content = TextAreaField('Content',validators = [DataRequired()])
+    submit = SubmitField('Post')
