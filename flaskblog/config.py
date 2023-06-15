@@ -8,3 +8,4 @@ class Config:
     MAIL_USE_TLS = True
     MAIL_USERNAME = os.environ.get('DB_USER')
     MAIL_PASSWORD = os.environ.get('DB_PASSWORD')
+    CKEDITOR_PKG_TYPE = 'full-all'

@@ -1,5 +1,6 @@
 {% extends 'layout.html' %}
 {% block hehe %}
+    {{ ckeditor.load()}}
     <div class="content-section">
         <form method="POST" action="">
             {{form.hidden_tag()}}
@@ -18,6 +19,21 @@
                     </div>
                     {% else %}
                     {{form.title(class = 'form-control form-control-lg')}}
+                    {% endif %}
+                </div>
+
+                <div class="form-group">
+                    {{form.desc.label(class = 'form-control-label')}}
+                    {% if form.desc.errors %}
+                    {{form.desc(class = 'form-control form-control-lg is-invalid')}}
+                    <div class="invalid-feedback">
+                        {% for error in form.desc.errors %}
+                        <span>{{ error }}</span>
+                        {% endfor %}
+
+                    </div>
+                    {% else %}
+                    {{form.desc(class = 'form-control form-control-lg')}}
                     {% endif %}
                 </div>
 

@@ -4,7 +4,8 @@ from flask_bcrypt import Bcrypt
 from flask_login import LoginManager
 from flask_mail import Mail
 from flaskblog.config import Config
-
+from flask_ckeditor import CKEditor
+from flask_migrate import Migrate
 
 db = SQLAlchemy()
 
@@ -17,6 +18,7 @@ login_manager.login_message_category = 'info'
 
 mail = Mail()
 
+ckeditor = CKEditor()
 
 
 def create_app(config_class=Config):
@@ -28,6 +30,7 @@ def create_app(config_class=Config):
     bcrypt.init_app(app)
     login_manager.init_app(app)
     mail.init_app(app)
+    ckeditor.init_app(app)
     
     from flaskblog.main.routes import main
     from flaskblog.posts.routes import posts
