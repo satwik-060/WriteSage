@@ -1,3 +1,6 @@
+*{
+  font-family: 'Space Mono', monospace;
+}
 body {
     background: #fafafa;
     color: #333333;
@@ -9,7 +12,7 @@ body {
   }
   
   .bg-steel {
-    background-color: #5f788a;
+    background-color: #040c11;
   }
   
   .site-header .navbar-nav .nav-link {

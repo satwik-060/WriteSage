@@ -1,4 +1,4 @@
-from flask_wtf import FlaskForm
-from wtforms import StringField,SubmitField,BooleanField
-from wtforms.validators import DataRequired,Length,Email,EqualTo, ValidationError
+import os 
 
+db_user = os.environ.get('DB_USER')
+print(db_user)

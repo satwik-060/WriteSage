@@ -1,0 +1,166 @@
+# Query: url_for
+# ContextLines: 1
+
+44 results - 10 files
+
+flaskblog/routes.py:
+  1  from flaskblog.models import User, Post
+  2: from flask import Flask , render_template, url_for,flash,redirect, request, abort
+  3  from flaskblog.forms import RegistrationForm, LoginForm, UpdateAccountForm, PostForm, RequestResetForm,ResetPasswordForm
+
+flaskblog/posts/routes.py:
+   1: from flask import Blueprint,render_template,url_for,flash,abort,request,redirect
+   2  from flask_login import current_user, login_required
+
+  18          flash("Your post has been created!","success")
+  19:         return redirect(url_for('main.home'))
+  20      return render_template('create_post.html',title = 'New Post', form = form, legend = ' New Post')
+
+  38          flash('Your Post has been updated!','success')
+  39:         return redirect(url_for('posts.post',post_id=  post.id))
+  40      elif request.method == 'GET':
+
+  54      flash("your Post has been deleted!",'success')
+  55:     return redirect(url_for('main.home'))
+  56  
+
+flaskblog/templates/home.html:
+   6  <article class="media content-section">
+   7:     <img src="{{url_for('static',filename = 'pictures/' + post.author.image_file)}}" alt="" class="rounded-circle article-img">
+   8      <div class="media-body">
+   9          <div class="article-metadata">
+  10:             <a class="mr-2" href="{{url_for('users.user_posts',username = post.author.username)}}">{{ post.author.username }}</a>
+  11              <small class="text-muted">{{ post.date_posted.strftime('%Y-%m-%d')}}</small>
+  12          </div>
+  13:         <h2><a class="article-title" href="{{url_for('posts.post',post_id=post.id)}}">{{ post.title }}</a></h2>
+  14          <p class="article-content">{{ post.content }}</p>
+
+  20          {% if posts.page == page_num %}
+  21:         <a href="{{ url_for('main.home',page = page_num)}}" class = "btn btn-info mb-4">{{ page_num }}</a>
+  22          {% else %}  
+  23:         <a href="{{ url_for('main.home',page = page_num)}}" class = "btn btn-outline-info mb-4">{{ page_num }}</a> 
+  24          {% endif %}
+
+flaskblog/templates/layout.html:
+   9          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  10:     <link rel="stylesheet" href="{{url_for('static',filename = 'main.css')}}">
+  11      {% if title %}
+
+  29                      <div class="navbar-nav mr-auto">
+  30:                         <a class="nav-item nav-link" href="{{url_for('main.home')}}">Home</a>
+  31:                         <a class="nav-item nav-link" href="{{url_for('main.about')}}">About</a>
+  32                      </div>
+
+  36  
+  37:                             <a href="{{url_for('posts.new_post')}}" class="nav-item nav-link">New Post</a>
+  38:                             <a href="{{url_for('users.account')}}" class="nav-item nav-link">Account</a>
+  39:                             <a href="{{url_for('users.logout')}}" class="nav-item nav-link">Logout</a>
+  40                          {%else %}
+  41:                             <a class="nav-item nav-link" href="{{url_for('users.login')}}">Login</a>
+  42:                             <a class="nav-item nav-link" href="{{url_for('users.register')}}">Register</a>
+  43                          {% endif %}
+
+flaskblog/templates/login.html:
+  45                  <small class="text-muted ml-2">
+  46:                     <a href="{{url_for('users.reset_request')}}">Forgot password?</a>
+  47                  </small>
+
+  51              <small class='text-muted'>
+  52:                 Need an Account? <a href="{{url_for('users.register')}}" class='ml-2'>Sign Up here</a>
+  53              </small>
+
+flaskblog/templates/post.html:
+   3  <article class="media content-section">
+   4:     <img src="{{url_for('static',filename = 'pictures/' + post.author.image_file)}}" alt="" class="rounded-circle article-img">
+   5      <div class="media-body">
+
+  10                  <div>
+  11:                     <a href="{{url_for('posts.update_post',post_id = post.id)}}" class="btn btn-secondary btn-sm m-1">Update</a>
+  12                      <button type='button' class="btn btn-danger btn-sm m-1" data-toggle="modal" data-target="#deleteModal">Delete</button>
+
+  31            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+  32:             <form action="{{ url_for('posts.delete_post', post_id = post.id)}}" method = "POST">
+  33                  <input type="submit" value="Delete" class="btn btn-danger">
+
+flaskblog/templates/register.html:
+  75          <small class='text-muted'>
+  76:             Already Have an Account? <a href="{{url_for('users.login')}}" class='ml-2'>Sign In</a>
+  77          </small>
+
+flaskblog/templates/user_post.html:
+   6  <article class="media content-section">
+   7:     <img src="{{url_for('static',filename = 'pictures/' + post.author.image_file)}}" alt="" class="rounded-circle article-img">
+   8      <div class="media-body">
+   9          <div class="article-metadata">
+  10:             <a class="mr-2" href="{{url_for('users.user_posts',username = post.author.username)}}">{{ post.author.username }}</a>
+  11              <small class="text-muted">{{ post.date_posted.strftime('%Y-%m-%d')}}</small>
+  12          </div>
+  13:         <h2><a class="article-title" href="{{url_for('posts.post',post_id=post.id)}}">{{ post.title }}</a></h2>
+  14          <p class="article-content">{{ post.content }}</p>
+
+  20          {% if posts.page == page_num %}
+  21:         <a href="{{ url_for('users.user_posts',username = user.username,page = page_num)}}" class = "btn btn-info mb-4">{{ page_num }}</a>
+  22          {% else %}  
+  23:         <a href="{{ url_for('users.user_posts', username = user.username, page = page_num)}}" class = "btn btn-outline-info mb-4">{{ page_num }}</a> 
+  24          {% endif %}
+
+flaskblog/users/routes.py:
+    1: from flask import render_template, url_for, flash, redirect, request, Blueprint
+    2  from flask_login import login_user, current_user, logout_user, login_required
+
+   14      if current_user.is_authenticated:
+   15:         return redirect(url_for('main.home'))
+   16      
+
+   23          flash('Your Account has been created!, You are now able to log in','success')
+   24:         return redirect(url_for('users.login'))
+   25      return render_template('register.html',title = 'Register',form = form)
+
+   31      if current_user.is_authenticated:
+   32:         return redirect(url_for('main.home'))
+   33      
+
+   39              next_page = request.args.get('next')
+   40:             return redirect(next_page) if next_page else redirect(url_for('main.home'))
+   41          else:
+
+   49      logout_user()
+   50:     return redirect(url_for('main.home'))
+   51  
+
+   64          flash('Your Account has been updated!','success')
+   65:         return redirect(url_for('users.account'))
+   66      elif request.method == 'GET':
+
+   68          form.email.data = current_user.email
+   69:     image_file = url_for('static',filename='pictures/' + current_user.image_file)
+   70      return render_template('account.html', title = 'Account', image_file = image_file,form = form)
+
+   83      if current_user.is_authenticated:
+   84:         return redirect(url_for('main.home'))
+   85      form = RequestResetForm()
+
+   89          flash("An email has been sent with instructions to reset your password","info")
+   90:         return redirect(url_for('users.login'))
+   91      return render_template('reset_request.html',title='Reset Password',form = form)
+
+   96      if current_user.is_authenticated:
+   97:         return redirect(url_for('main.home'))
+   98      user = User.verify_reset_token(token)
+
+  100          flash('Invalid or Expired Token.','warning')
+  101:         return redirect(url_for('users.reset_request'))
+  102      
+
+  108          flash('Your Password has been updated!, You are now able to log in','success')
+  109:         return redirect(url_for('users.login'))
+  110      return render_template('reset_token.html',title = 'Reset Password',form = form)
+
+flaskblog/users/utils.py:
+   3  from PIL import Image
+   4: from flask import url_for
+   5  from flask_mail import Message
+
+  23      msg = Message('Password Reset Request', sender = 'noreply@demo.com', recipients = [user.email])
+  24:     msg.body = f'''To reset your password , Please Visit the Following link : {url_for('users.reset_token',token=token,_external=True)}
+  25      
