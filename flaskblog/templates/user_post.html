@@ -19,11 +19,11 @@
     <ul class="pagination justify-content-center">
         {% if posts.page > 1 %}
             <li class="page-item ">
-                <a class="page-link" href="{{ url_for('users.user_posts',username = user.username,page = posts.page - 1)}}">Previous</a>
+                <a class="page-link" href="{{ url_for('users.user_posts',username = user.username,page = posts.page - 1)}}"><<</a>
             </li>
         {% else %}
             <li class="page-item disabled">
-                <a class="page-link" href="{{ url_for('users.user_posts',username = user.username,page = posts.page - 1)}}">Previous</a>
+                <a class="page-link" href="{{ url_for('users.user_posts',username = user.username,page = posts.page - 1)}}"><<</a>
             </li>
         {% endif %}
 
@@ -44,11 +44,11 @@
         {% endfor %}
         {% if posts.page == (posts.last / posts.per_page) %}
             <li class="page-item">
-                <a class="page-link " href="{{ url_for('users.user_posts',username = user.username,page = posts.page + 1)}}">Next</a>
+                <a class="page-link " href="{{ url_for('users.user_posts',username = user.username,page = posts.page + 1)}}">>></a>
             </li>
         {% else %}
             <li class="page-item disabled">
-                <a class="page-link" href="{{ url_for('users.user_posts',username = user.username,page = posts.page + 1)}}">Next</a>
+                <a class="page-link" href="{{ url_for('users.user_posts',username = user.username,page = posts.page + 1)}}">>></a>
             </li>
         {% endif %}
         
