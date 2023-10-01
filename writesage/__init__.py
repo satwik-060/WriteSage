@@ -3,7 +3,7 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_bcrypt import Bcrypt
 from flask_login import LoginManager
 from flask_mail import Mail
-from flaskblog.config import Config
+from writesage.config import Config
 from flask_ckeditor import CKEditor
 
 db = SQLAlchemy()
@@ -31,10 +31,10 @@ def create_app(config_class=Config):
     mail.init_app(app)
     ckeditor.init_app(app)
     
-    from flaskblog.main.routes import main
-    from flaskblog.posts.routes import posts
-    from flaskblog.users.routes import users
-    from flaskblog.errors.handlers import errors
+    from writesage.main.routes import main
+    from writesage.posts.routes import posts
+    from writesage.users.routes import users
+    from writesage.errors.handlers import errors
     
     app.register_blueprint(errors)
     app.register_blueprint(users)

@@ -1,10 +1,10 @@
 from flask import render_template, url_for, flash, redirect, request, Blueprint
 from flask_login import login_user, current_user, logout_user, login_required
-from flaskblog import db, bcrypt
-from flaskblog.models import User, Post
-from flaskblog.users.forms import (RegistrationForm, LoginForm, UpdateAccountForm,
+from writesage import db, bcrypt
+from writesage.models import User, Post
+from writesage.users.forms import (RegistrationForm, LoginForm, UpdateAccountForm,
                                    RequestResetForm, ResetPasswordForm)
-from flaskblog.users.utils import save_picture, send_reset_email
+from writesage.users.utils import save_picture, send_reset_email
 
 users = Blueprint('users',__name__)
 
@@ -16,7 +16,7 @@ def register():
     
     form = RegistrationForm()
     if form.validate_on_submit():
-        hashed_password = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
+        hashed_pasword = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
         user = User(username=form.username.data, email = form.email.data,password = hashed_password)
         db.session.add(user)
         db.session.commit()

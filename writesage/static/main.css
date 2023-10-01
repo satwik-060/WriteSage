@@ -1,7 +1,8 @@
 *{
-  font-family: 'Space Mono', monospace;
+  padding : 0px;
 }
 body {
+    
     background: #fafafa;
     color: #333333;
     margin-top: 5rem;
@@ -16,14 +17,17 @@ body {
   }
   
   .site-header .navbar-nav .nav-link {
+    
     color: #cbd5db;
   }
   
   .site-header .navbar-nav .nav-link:hover {
+    
     color: #ffffff;
   }
   
   .site-header .navbar-nav .nav-link.active {
+    
     font-weight: 500;
   }
   
@@ -80,4 +84,10 @@ body {
   
   .account-heading {
     font-size: 2.5rem;
+  }
+  .font-heading{
+    font-family: 'Work Sans', sans-serif;
+  }
+  .font-nav{
+    font-family: 'Space Mono', monospace;
   }

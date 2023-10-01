@@ -1,8 +1,8 @@
 from flask import Blueprint,render_template,url_for,flash,abort,request,redirect
 from flask_login import current_user, login_required
-from flaskblog.models import Post
-from flaskblog import db
-from flaskblog.posts.forms import PostForm
+from writesage.models import Post
+from writesage import db
+from writesage.posts.forms import PostForm
 
 
 posts = Blueprint('posts',__name__)

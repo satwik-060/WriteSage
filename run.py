@@ -1,5 +1,5 @@
 '''Learning Flask'''
-from flaskblog import create_app
+from writesage import create_app
 app = create_app()
 
 if __name__ == '__main__':

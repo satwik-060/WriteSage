@@ -1,9 +1,10 @@
-from flaskblog import db, login_manager
+from writesage import db, login_manager
 from flask import current_app
 from datetime import datetime
 from flask_login import UserMixin
-from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
-
+# from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
+from itsdangerous.url_safe import URLSafeTimedSerializer as Serializer
+ 
 @login_manager.user_loader
 def load_user(user_id):
     return User.query.get(int(user_id))
